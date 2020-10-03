@@ -1,0 +1,13 @@
+.header{
+    height: 500px;
+    background-image:url("../images/bg_banner.jpg");
+    background-size: cover;
+    margin-bottom: 50px;
+}
+.sub_title{
+    margin-bottom: 20px;
+}
+
+input, textarea{
+    width: 100%;
+}

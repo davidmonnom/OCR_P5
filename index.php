@@ -11,35 +11,59 @@ try{
     require("controller/userController.php");
     require("controller/commentController.php");
 
-    //CALL CLASSES
     $rm = new Router($_GET['url']);
+    $postC = new PostController();
+    $userC = new UserController(); 
 
-    //
-    // L'index de la page.
-    //
-    $rm->get('/', function(){                                   
+    session_start();
+
+    $rm->get('/', function(){ // Index of the blog                                  
         
-   
     }); 
 
-    //
-    // La liste des posts.
-    //
-    $rm->get('/posts', function(){                              
-        $postC = new PostController();
+
+    /*
+        Routes for the posts management
+    */ 
+    $rm->get('/posts', function() use($postC) { // Show list of posts                           
         $postC->listPosts();
+    }); 
+    $rm->get('/posts/create', function() use($postC) { // Show the "creating post" form
+        $postC->createPost();
     });
-    
-    //
-    // Détail d'un post
-    //
-    $rm->get('/posts/:id', function($id){                      
-        $postC = new PostController();
+    $rm->get('/posts/:id', function($id) use($postC) { // Show post by id               
         $postC->viewPost($id);
+    });
+
+    /*
+        Routes for the users management
+    */
+    $rm->get('/user/register', function() use($userC) { // Show register page                  
+        $userC->register();
+    });
+
+    $rm->get('/user/login', function() use($userC) { // Show login page                  
+        $userC->login();
     }); 
 
-    $rm->run();
 
+
+    /*
+        Ajax functions
+    */
+    $rm->post('/ajax/post', function() use($postC){  // Create a post
+        $postC->createPost($_POST["title"], $_POST["subject"], $_POST["description"]);
+    });
+
+    $rm->post('/ajax/register', function() use($userC){ // Create an account
+        $userC->register($_POST["username"], $_POST["firstname"], $_POST["lastname"], $_POST["password"]);
+    });
+
+    $rm->post('/ajax/login', function() use($userC){ // Create an account
+        $userC->login($_POST["username"], $_POST["password"]);
+    });
+
+    $rm->run(); // Execute
 }
 catch(Exception $e){
 	echo $e->getMessage();

@@ -1,7 +1,7 @@
 <?php
 
 class View{
-    public function render($page, $data){
+    public function render($page, $data = array()){
         $pageContent = $this->renderPage('view/pages/' . $page, $data);
         $pageTemplate = $this->renderPage('view/baseView.php', array(
             'pageContent' => $pageContent

@@ -9,9 +9,9 @@ class PostController extends Controller{
         parent::__construct();
         $this->_postMan = new PostManager();
     }
-    
+
     public function listPosts(){
-        $this->view()->render("listPostsView.php", array(
+        $this->view()->render('listPostsView.php', array(
             'postsList' => $this->postMan()->getPosts()
         ));
     }
@@ -20,8 +20,13 @@ class PostController extends Controller{
         echo "list";
     }
 
-    public function createPost(){
-
+    public function createPost($title=NULL, $subject=NULL, $description=NULL){
+        if(!empty($title) && !empty($subject) && !empty($description)){
+            // $this->postMan()->add(new Post(null, $title, $subject, $description);
+            // $this->postMan()->add(new Post(null, $title, $subject, $description);
+        }else{
+            $this->view()->render('createPostView.php');
+        }
     }
 
     public function deletePost(){
