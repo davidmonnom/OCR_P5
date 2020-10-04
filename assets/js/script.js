@@ -1,4 +1,20 @@
 $( document ).ready(function() {
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++) {
+		  color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+	$( ".colorRandom" ).each(function() {
+		$( this ).css("background-color", getRandomColor());
+	});
+	$( ".colorRandomText" ).each(function() {
+		$( this ).css("color", getRandomColor());
+	});
+
+
     $("#userRegister").on('submit', function(e){  //User register request
         e.preventDefault();
         $.ajax({
@@ -44,7 +60,20 @@ $( document ).ready(function() {
        });
        return false;
    });
-   
+   $("#newComment").on('submit', function(event){ //New Comment request
+		$.ajax({
+			type: "POST",
+			url: '/ajax/comment',
+			data: {"description":$("#comment").val(),"idPost":$("#newComment").attr("value")},
+			success: function(reponse){
+				$("#comment").val("")
+				$("#ajaxReponse").text("Votre commentaire va bientôt être validé.");
+			},
+			dataType: "json",
+		});
+		event.preventDefault();
+		return false;
+	});
 	$("#newPostForm").on('submit', function(event){ //New post request
 		$.ajax({
 			type: "POST",
@@ -62,7 +91,7 @@ $( document ).ready(function() {
                     }, 2000);
                 }else{
                     $(".responseMessage").text("Une erreur est survenue.");
-                    $(".responseMessage").css("color", "green");
+                    $(".responseMessage").css("color", "red");
                 }
 			},
 			dataType: 'json',
@@ -186,7 +215,7 @@ $( document ).ready(function() {
 			data: {"idUser":$(this).val()},
 			success: function(reponse, data){
 				if(reponse.status == "1"){
-					$("#com_"+reponse.idCom).fadeOut( "slow", function() {
+					$("#user_"+reponse.idUser).fadeOut( "slow", function() {
 					});
 				}else{
 					console.log("error");

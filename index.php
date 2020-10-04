@@ -70,7 +70,7 @@ try{
         $userC->logout();
     });
 
-    $rm->post('/ajax/deleteUser', function() use($userC){  // Delete a comment
+    $rm->post('/ajax/deleteUser', function() use($userC){  // Delete a User
         $userC->delete($_POST["idUser"]);
     });
 
@@ -93,8 +93,12 @@ try{
     $rm->post('/ajax/post', function() use($postC){  // Create a post
         $postC->createPost($_POST["title"], $_POST["subject"], $_POST["description"]);
     });
+
+    $rm->post('/ajax/comment', function() use($commC){  // Create a comment
+        $commC->createComment($_POST["idPost"], $_POST["description"]);
+    });
     
-    $rm->post('/ajax/modify', function() use($postC){  // Create a post
+    $rm->post('/ajax/modify', function() use($postC){  // Modify a post
         $postC->modifyPost($_POST["title"], $_POST["subject"], $_POST["description"], $_POST["idPost"]);
     });
 

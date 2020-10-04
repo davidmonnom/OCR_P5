@@ -13,6 +13,19 @@ class CommentController extends Controller{
             }
         }
     }
+
+    public function createComment($idPost, $description){
+        if(isset($_SESSION["user"])){
+            $return = $this->commMan()->add(new Comment(null, $idPost, $_SESSION["user"]->id(), $description, new DateTime('NOW'), 0));
+
+            $result["status"] = $return;
+            echo json_encode($result);
+        }else{
+            $result["status"] = false;
+            echo json_encode($result);
+        }
+    }
+
     public function validate($id){
         if(isset($_SESSION["user"])){
             if($_SESSION["user"]->isAdmin()){

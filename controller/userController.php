@@ -6,13 +6,15 @@ class UserController extends Controller{
         if(isset($_SESSION["user"])){
             if($_SESSION["user"]->isAdmin()){
 				$userSelected = $this->userMan()->getById($id);
-				if($userSelected->isAdmin()){
+				if(!$userSelected->isAdmin()){
 					$return = $this->userMan()->delete($id);
 
 					$reponse["status"] = $return;
+					$reponse["idUser"] = $id;
 					echo json_encode($reponse);
 				}else{
 					$reponse["status"] = false;
+					$reponse["idUser"] = $id;
 					echo json_encode($reponse);
 				}
             }

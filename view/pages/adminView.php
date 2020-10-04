@@ -38,7 +38,7 @@
                             echo("<td>$comment_description</td>");
                             echo("<td>$comment_username</td>");
                             echo("<td>$comment_date</td>");
-                            echo("<td><button value='$comment_id'class='btn btn-primary btnAdmin deleteComment'>Supprimer</button><button value='$comment_id' class='btn btn-primary btnAdmin valideComment'>Valider</button></td>");
+                            echo("<td><button value='$comment_id'class='btn btn-sm btn-outline-secondary btnAdmin deleteComment'>Supprimer</button><button value='$comment_id' class='btn btn-sm btn-outline-secondary btnAdmin valideComment'>Valider</button></td>");
                         echo("</tr>");
                     }
                 ?>
@@ -76,7 +76,7 @@
                             echo("<td>$post_subject</td>");
                             echo("<td>$post_username</td>");
                             echo("<td>$post_date</td>");
-                            echo("<td><button value='$post_id'class='btn btn-primary btnAdmin deletePost'>Supprimer</button><button value='$post_id' class='btn btn-primary btnAdmin validePost'>Valider</button></td>");
+                            echo("<td><button value='$post_id'class='btn btn-sm btn-outline-secondary btnAdmin deletePost'>Supprimer</button><button value='$post_id' class='btn btn-sm btn-outline-secondary btnAdmin validePost'>Valider</button></td>");
                         echo("</tr>");
                     }
                 ?>
@@ -107,14 +107,14 @@
                         $user_username = htmlspecialchars($user->username());
                         $user_creationDate = $user->creationDate()->format('Y-m-d H:i:s');
 
-                        echo("<tr id='post_$user_id'>");
+                        echo("<tr id='user_$user_id'>");
                             echo("<td>$key</td>");
                             echo("<td>$user_id</td>");
                             echo("<td>$user_lastname</td>");
                             echo("<td>$user_firstname</td>");
                             echo("<td>$user_username</td>");
                             echo("<td>$user_creationDate</td>");
-                            if(!$user->isAdmin()){echo("<td><button value='$user_id'class='btn btn-primary btnAdmin deleteUser'>Supprimer</button></td>");}else{echo "<td>!! Admin !!</td>";}
+                            if(!$user->isAdmin()){echo("<td><button value='$user_id'class='btn btn-sm btn-outline-secondary btnAdmin deleteUser'>Supprimer</button></td>");}else{echo "<td>!! Admin !!</td>";}
                         echo("</tr>");
                     }
                 ?>

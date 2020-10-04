@@ -9,18 +9,29 @@ class PostController extends Controller{
     }
 
     public function viewPost($idPost){
-        if($_SESSION['user']->isAdmin()){
-            $post = $this->postMan()->getById($idPost);
-            if (!$post) {
-                throw new Exception('Le post n\'a pas été trouvé');
-                return false;
+        $post = $this->postMan()->getById($idPost);
+        if (!$post) {
+            throw new Exception('Le post n\'a pas été trouvé');
+            return false;
+        }
+
+        if($post->isVerified() || (isset($_SESSION["user"]) && $_SESSION["user"]->isAdmin())){
+            $needed_users = array();
+            $commentsList = $this->commMan()->getByIdPost($idPost);
+
+            foreach($commentsList as $comment){
+                $idUser = $comment->idUser();
+                if(!isset($needed_users[$idUser])){
+                    $needed_users[$idUser] = $this->userMan()->getById($idUser);
+                }
+            }
+            if(!isset($needed_users[$post->idUser()])){
+                $needed_users[$post->idUser()] = $this->userMan()->getById($post->idUser());
             }
 
-            $user = $this->userMan()->getById($post->idUser());
-            $commentsList = $this->commMan()->getByIdPost($idPost);
             $this->view()->render('viewPostView.php', array(
                 'post' => $post,
-                'user' => $user,
+                'needed_users' => $needed_users,
                 'commentsList' => $commentsList
             ));
         }else{
@@ -29,12 +40,16 @@ class PostController extends Controller{
     }
 
     public function createPost($title=NULL, $subject=NULL, $description=NULL){
-        if(!empty($title) && !empty($subject) && !empty($description)){
+        if(!empty($title) && !empty($subject) && !empty($description) && isset($_SESSION["user"])){
             $return = $this->postMan()->add(new Post(null, $_SESSION["user"]->id(), $title, $subject, $description, new DateTime('NOW'), null, 0));
 
             $result["status"] = $return;
             echo json_encode($result);
-        }else{
+        }elseif(!empty($title) && !empty($subject) && !empty($description)){
+            $result["status"] = false;
+            echo json_encode($result);
+        }
+        else{
             $this->view()->render('createPostView.php');
         }
     }

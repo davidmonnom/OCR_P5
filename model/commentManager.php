@@ -7,6 +7,11 @@ class CommentManager {
 		return new Comment($row->id, $row->idPost, $row->idUser, $row->description, $creationDate, $row->isVerified);
 	}
 
+	public function add($comment){
+		$prepare = Database::getInstance()->prepare("INSERT INTO comment(idPost, idUser, description, creationDate, isVerified) VALUES(?, ?, ?, ?, ?)"); 
+		return $prepare->execute(array($comment->idPost(), $comment->idUser(), $comment->description(), $comment->creationDate()->format('Y-m-d H:i:s'), $comment->isVerified()));
+	}
+
 	public function delete($id){
 		$prepare = Database::getInstance()->prepare("DELETE FROM comment WHERE id = ?"); 
 		return $prepare->execute(array($id));
