@@ -1,4 +1,7 @@
 # OCR_P5
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a0ab465fb1c466c8895ba4fe7853119)](https://app.codacy.com/gh/davidmonnom/OCR_P5?utm_source=github.com&utm_medium=referral&utm_content=davidmonnom/OCR_P5&utm_campaign=Badge_Grade)
+
 Le projet devrait prendre environt 6 jours. De vendredi à mercredi.
 
 Projet 5 d'OpenClassRooms: Créer un site avec MVC.
