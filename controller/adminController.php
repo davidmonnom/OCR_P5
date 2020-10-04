@@ -6,6 +6,7 @@ class AdminController extends Controller {
         if($_SESSION["user"]->isAdmin() == 1){
 
             $needed_users = array();
+            $needed_posts = array();
             $posts = $this->postMan()->getUnverifiedPosts();
             $comments = $this->commMan()->getUnverifiedComments();
 
@@ -19,10 +20,15 @@ class AdminController extends Controller {
                 $idUser = $comment->idUser();
                 if(!isset($needed_users[$idUser]))
                     $needed_users[$idUser] = $this->userMan()->getById($idUser);
+
+                $idPost = $comment->idPost();
+                if(!isset($needed_posts[$idPost]))
+                    $needed_posts[$idPost] = $this->postMan()->getById($idPost);
             }
 
             $this->view()->render('adminView.php', array(
-                'usersList' => $needed_users,
+                'neededUsers' => $needed_users,
+                'neededPosts' => $needed_posts,
                 'postsList' => $posts,
                 'commentsList' => $comments
             ));

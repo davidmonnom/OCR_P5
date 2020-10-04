@@ -58,3 +58,7 @@ input, textarea{
 .footerBottom{
     background-color: #495058;
 }
+.btnAdmin{
+    padding: 5px !important;
+    margin-right: 5px;
+}

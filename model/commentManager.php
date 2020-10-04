@@ -7,6 +7,16 @@ class CommentManager {
 		return new Comment($row->id, $row->idPost, $row->idUser, $row->description, $creationDate, $row->isVerified);
 	}
 
+	public function delete($id){
+		$prepare = Database::getInstance()->prepare("DELETE FROM comment WHERE id = ?"); 
+		return $prepare->execute(array($id));
+	}
+
+	public function update($comment){
+		$prepare = Database::getInstance()->prepare("UPDATE comment SET idPost=?, idUser=?, description=?, creationDate=?, isVerified=? WHERE id=?"); 
+		return $prepare->execute(array($comment->idPost(), $comment->idUser(), $comment->description(), $comment->creationDate()->format('Y-m-d H:i:s'), $comment->isVerified(), $comment->id()));
+	}
+
 	public function getComments(){
 		$prepare = Database::getInstance()->prepare("SELECT * FROM comment"); 
 		$prepare->execute();
@@ -28,8 +38,6 @@ class CommentManager {
 			$commentsList[] = $this->buildFromRow($row);
 		}
 
-		print_r($commentsList);
-
 		return $commentsList;
 	}
 	
@@ -37,7 +45,7 @@ class CommentManager {
 		$prepare = Database::getInstance()->prepare("SELECT * FROM comment WHERE id = ?"); 
 		$prepare->execute(array($id));
 
-		if($row = $prepare->fetch()){
+		if($row = $prepare->fetch(PDO::FETCH_OBJ)){
 			return $this->buildFromRow($row);
 		}else{
 			return false;
@@ -54,5 +62,5 @@ class CommentManager {
 		}
 
 		return $commentsList;
-    }
+	}
 }

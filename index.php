@@ -16,6 +16,7 @@ try{
     $rm = new Router($_GET['url']);
     $postC = new PostController();
     $userC = new UserController(); 
+    $commC = new CommentController(); 
     $indexC = new IndexController(); 
     $adminC = new AdminController();
 
@@ -64,6 +65,22 @@ try{
     */
     $rm->post('/ajax/logout', function() use($userC){  // Create a post
         $userC->logout();
+    });
+
+    $rm->post('/ajax/deleteCom', function() use($commC){  // Create a post
+        $commC->delete($_POST["idCom"]);
+    });
+
+    $rm->post('/ajax/valideCom', function() use($commC){  // Create a post
+        $commC->validate($_POST["idCom"]);
+    });
+
+    $rm->post('/ajax/deletePost', function() use($postC){  // Create a post
+        $postC->delete($_POST["idPost"]);
+    });
+
+    $rm->post('/ajax/validePost', function() use($postC){  // Create a post
+        $postC->validate($_POST["idPost"]);
     });
 
     $rm->post('/ajax/post', function() use($postC){  // Create a post
