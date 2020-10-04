@@ -6,7 +6,16 @@ $( document ).ready(function() {
         url: '/ajax/register',
         data: {"password":$("#password").val(),"username":$("#username").val(), "firstname":$("#firstname").val(), "lastname":$("#lastname").val()},
         success: function(reponse, data){
-            alert("readyState: "+reponse.readyState+"\nstatus: "+reponse.status);
+            if(reponse.status){
+                $(".responseMessage").text("Votre compte a bien été créé, vous allez être redirigé.");
+                $(".responseMessage").css("color", "green");
+                setTimeout(function(){
+                    window.location.href = "/user/login";
+                }, 1000);
+            }else{
+                $(".responseMessage").text("Une erreur est survenue.");
+                $(".responseMessage").css("color", "red");
+            }
         },
         dataType: "json",
         });
@@ -20,7 +29,16 @@ $( document ).ready(function() {
 			url: '/ajax/login',
 			data: {"password":$("#password").val(),"username":$("#username").val()},
 			success: function(reponse, data){
-
+                if(reponse.status){
+                    $(".responseMessage").text("Vous êtes connecté, vous allez être redirigé.");
+                    $(".responseMessage").css("color", "green");
+                    setTimeout(function(){
+                        window.location.href = "/";
+                    }, 1000);
+                }else{
+                    $(".responseMessage").text("Une erreur est survenue.");
+                    $(".responseMessage").css("color", "red");
+                }
 			},
 			dataType: "json",
        });

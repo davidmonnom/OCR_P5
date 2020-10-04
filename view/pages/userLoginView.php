@@ -8,7 +8,7 @@
 		<label for="password"><b>Mot de passe</b></label>
 		<input id="password" type="password" placeholder="Mot de passe" name="password"required>
 		<hr>
-		<button type="submit" class="btn_login login_now btn btn-primary">Se connecter</button>
+		<button type="submit" class="btn_login login_now btn btn-primary">Se connecter</button> <span style="font-weight: bold;" class="responseMessage"></span>
 		<p id="reponse_login" style="font-weight: bold; color: red;"></p>
 	</div>
 

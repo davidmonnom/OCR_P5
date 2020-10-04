@@ -7,61 +7,47 @@
         <script src="https://fludy.net/assets/js/script.js" type="text/javascript"></script>
     </head>
     <body>
-    <section class="navbar">
-        <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/posts">Liste des posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/posts/create">Publier un post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="mx-auto order-0">
-                <a class="navbar-brand mx-auto" href="index.php">Mon Blog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="index.php?action=logout">Se déconnecter</a>
-                                    <a class="dropdown-item" href="index.php?action=moderation">Moderation</a>
-                                    <a class="dropdown-item" href="index.php?action=administration">Administration</a>
-                                    <a class="dropdown-item" href="index.php?action=moderation">Moderation</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/login">Se connecter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/register">S'enregistrer</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+		<section class="navbarSection">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand" href="/">MVC</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Accueil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/posts">Liste des posts</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/create">Créer un post</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<?php if(is_null($user)){ ?>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/login">Se connecter</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/register">S'enregistrer</a>
+						</li>
+						<?php }else{ ?>
+						<li class="nav-item">
+							<a class="nav-link" href="">Connecté via <?= $user["userName"] ?></a>
+						</li>
+						<?php } ?>
+					</ul>
+				</div>
+			</nav>
         </section>
-        <section class="header">
-            
-        </section>
-        <section class="content">
+        <section class="contentSection">
             <?php
                 echo($pageContent);
             ?>
         </section>
-        <section class="footer">
+        <section class="footerSection">
 
         </section>
     </body>

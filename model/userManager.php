@@ -11,7 +11,7 @@ class UserManager {
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE username = ?"); 
 		$prepare->execute(array($username));
 
-		if($row = $prepare->fetch()){
+		if($row = $prepare->fetch(PDO::FETCH_OBJ)){
 			return $this->buildFromRow($row);
 		}else{
 			return false;

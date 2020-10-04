@@ -14,13 +14,17 @@ class UserController extends Controller{
 		if(!empty($username) && !empty($password)){
 			if($user = $this->userMan()->getByUsername($username)){
 				if(password_verify($password, $user->password())){
-					// Connect the user
-					
+					$_SESSION['connected_user'] = $user;
+
+					$result["status"] = true;
+					echo json_encode($result);
 				}else{
-					http_response_code(401);
+					$result["status"] = false;
+					echo json_encode($result);
 				}
 			}else{
-				http_response_code(404);
+				$result["status"] = false;
+				echo json_encode($result);
 			}
 		}else{
 			$this->view()->render('userLoginView.php');
@@ -29,11 +33,13 @@ class UserController extends Controller{
 
 	public function register($username=null, $firstname=null, $lastname=null, $password=null){
 		if(!empty($username) && !empty($firstname) && !empty($lastname) && !empty($password)){
-			if(!$this->userMan()->getByUsername($username)){
-				$this->userMan()->add(new User(null, $firstname, $lastname, $username, password_hash($password, PASSWORD_DEFAULT), new DateTime('NOW'), 0));
-				http_response_code(200);
+			if($this->userMan()->getByUsername($username) === false){
+				$return = $this->userMan()->add(new User(null, $firstname, $lastname, $username, password_hash($password, PASSWORD_DEFAULT), new DateTime('NOW'), 0));
+				$result["status"] = $return;
+				echo json_encode($result);
 			}else{
-				http_response_code(401);
+				$result["status"] = false;
+				echo json_encode($result);
 			}
 		}else{
 			$this->view()->render('userRegisterView.php');

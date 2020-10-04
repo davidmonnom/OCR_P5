@@ -2,9 +2,22 @@
 
 class View{
     public function render($page, $data = array()){
+        if(isset($_SESSION['connected_user'])){
+            $user = $_SESSION['connected_user'];
+            $user_data = array(
+                'userName' => $user->userName(),
+                'isAdmin' => $user->isAdmin()
+            );
+        }else{
+            $user_data = null;
+        }
+
+        $data['user'] = $user_data;
+        
         $pageContent = $this->renderPage('view/pages/' . $page, $data);
         $pageTemplate = $this->renderPage('view/baseView.php', array(
-            'pageContent' => $pageContent
+            'pageContent' => $pageContent,
+            'user' => $user_data
         ));
 
         echo($pageTemplate);

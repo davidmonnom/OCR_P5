@@ -12,7 +12,7 @@
 		<label for="password"><b>Mot de passe</b></label>
 		<input type="password" id="password" placeholder="Mot de passe" name="password"required>
 		<hr>
-		<button type="submit" class=" btn_login btn btn-primary">S'enregistrer</button>
+		<button type="submit" class=" btn_login btn btn-primary">S'enregistrer</button> <span style="font-weight: bold;" class="responseMessage"></span>
 	</div>
 </form>
 <div class="container signin">

@@ -8,19 +8,24 @@ try{
     require("class/Route.php");
     require("class/Database.php");
     require("controller/postController.php");
+    require("controller/indexController.php");
     require("controller/userController.php");
     require("controller/commentController.php");
 
     $rm = new Router($_GET['url']);
     $postC = new PostController();
     $userC = new UserController(); 
+    $indexC = new IndexController(); 
 
     session_start();
 
-    $rm->get('/', function(){ // Index of the blog                                  
-        
-    }); 
 
+    /*
+        Routes for the index management
+    */ 
+    $rm->get('/', function() use($indexC) { // Index of the blog                                  
+        $indexC->index();
+    }); 
 
     /*
         Routes for the posts management

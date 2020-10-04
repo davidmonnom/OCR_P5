@@ -22,8 +22,7 @@ class PostController extends Controller{
 
     public function createPost($title=NULL, $subject=NULL, $description=NULL){
         if(!empty($title) && !empty($subject) && !empty($description)){
-            // $this->postMan()->add(new Post(null, $title, $subject, $description);
-            // $this->postMan()->add(new Post(null, $title, $subject, $description);
+            // $this->postMan()->add(new Post($user, $title, $subject, $description);
         }else{
             $this->view()->render('createPostView.php');
         }
