@@ -15,29 +15,34 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
+						<li class="nav-item <?php if($activePage == 'indexView.php'){echo "active";} ?>">
 							<a class="nav-link" href="/">Accueil</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item <?php if($activePage == 'listPostsView.php'){echo "active";} ?>">
 							<a class="nav-link" href="/posts">Liste des posts</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item <?php if($activePage == 'createPostView.php'){echo "active";} ?>">
 							<a class="nav-link" href="/posts/create">Créer un post</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav">
 						<?php if(is_null($user)){ ?>
-						<li class="nav-item">
-							<a class="nav-link" href="/user/login">Se connecter</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/user/register">S'enregistrer</a>
-						</li>
+							<li class="nav-item <?php if($activePage == 'userLoginView.php'){echo "active";} ?>">
+								<a class="nav-link" href="/user/login">Se connecter</a>
+							</li>
+							<li class="nav-item <?php if($activePage == 'userRegisterView.php'){echo "active";} ?>">
+								<a class="nav-link" href="/user/register">S'enregistrer</a>
+							</li>
 						<?php }else{ ?>
-						<li class="nav-item">
-							<a class="nav-link" href="">Connecté via <?= $user["userName"] ?></a>
-						</li>
-						<?php } ?>
+							<li class="nav-item">
+								<a class="nav-link" href="/user/logout">Se déconnecter</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">
+								<?=$user->userName();?>
+								</a>
+							</li>
+						<?php }?>
 					</ul>
 				</div>
 			</nav>
@@ -48,7 +53,9 @@
             ?>
         </section>
         <section class="footerSection">
-
+			<?php if($user->isAdmin()){ ?>
+				<a class="dropdown-item" href="/user/admin">Administration</a>
+			<?php } ?>
         </section>
     </body>
 </html>

@@ -30,6 +30,6 @@ class PostManager {
 
 	public function add($post){
 		$prepare = Database::getInstance()->prepare("INSERT INTO post(idUser, title, subject, description, creationDate, isVerified) VALUES(?, ?, ?, ?, ?, ?)"); 
-		return $prepare->execute(array($post->id(), $$post->title(), $post->subject(), $post->description(), $post->creationDate(), $post->isVerified()));
+		return $prepare->execute(array($post->idUser(), $post->title(), $post->subject(), $post->description(), $post->creationDate(), $post->isVerified()));
 	}
 }

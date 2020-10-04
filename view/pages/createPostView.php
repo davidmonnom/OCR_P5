@@ -8,6 +8,6 @@
         <textarea id="subject" name="subject" cols="35" rows="4"></textarea><br/>
         <label for="description"><b>Contenu</b></label><br/>
         <textarea id="description" name="description" cols="40" rows="5"></textarea><br/>
-        <button type="submit" class=" btn_login btn btn-primary" style="margin-top: 15px;">Créer</button>
+        <button type="submit" class=" btn_login btn btn-primary" style="margin-top: 15px;">Créer</button> <span style="font-weight: bold;" class="responseMessage"></span>
     </form>
 </div>

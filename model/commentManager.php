@@ -3,7 +3,18 @@ require_once('model/entity/comment.php');
 
 class CommentManager {
     private function buildFromRow($row){
-		return new Comment($row->id, $row->idPost, $row->idUser, $row->description, $row->creationDate, $row->isVerified)
+		return new Comment($row->id, $row->idPost, $row->idUser, $row->description, $row->creationDate, $row->isVerified);
+	}
+
+	public function getComments(){
+		$prepare = Database::getInstance()->query("SELECT * FROM comments"); 
+
+		$commentsList = array();
+		while ($row = $prepare->fetch(PDO::FETCH_OBJ)) {
+			$commentsList[] = $this->buildFromRow($row);
+		}
+
+		return $commentsList;
 	}
 	
     public function getById($id){

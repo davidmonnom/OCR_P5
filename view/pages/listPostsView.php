@@ -6,7 +6,6 @@
             <h4 class='title'><?php echo $item->title(); ?></h4>
             <p class="subject"><?php echo $item->subject(); ?></p>
             <p class="description"><?php echo $item->description(); ?></p>
-            <p class="description"><?php echo $item->description(); ?></p>
         </div>
     <?php } ?>
     <div>

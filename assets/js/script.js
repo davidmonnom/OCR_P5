@@ -11,7 +11,7 @@ $( document ).ready(function() {
                 $(".responseMessage").css("color", "green");
                 setTimeout(function(){
                     window.location.href = "/user/login";
-                }, 1000);
+                }, 2000);
             }else{
                 $(".responseMessage").text("Une erreur est survenue.");
                 $(".responseMessage").css("color", "red");
@@ -34,7 +34,7 @@ $( document ).ready(function() {
                     $(".responseMessage").css("color", "green");
                     setTimeout(function(){
                         window.location.href = "/";
-                    }, 1000);
+                    }, 2000);
                 }else{
                     $(".responseMessage").text("Une erreur est survenue.");
                     $(".responseMessage").css("color", "red");
@@ -51,8 +51,19 @@ $( document ).ready(function() {
 			url: '/ajax/post',
 			data: {'title':$("#title").val(), 'subject':$("#subject").val(), 'description':$("#description").val()},
 			success: function(reponse){
-				console.log(reponse);
-			
+				if(reponse.status){
+                    $("#title").val("");
+                    $("#subject").val("");
+                    $("#description").val("");
+                    $(".responseMessage").text("Votre post à été publier, il va bientôt être validé par un administrateur.");
+                    $(".responseMessage").css("color", "green");
+                    setTimeout(function(){
+                        window.location.href = "/posts";
+                    }, 2000);
+                }else{
+                    $(".responseMessage").text("Une erreur est survenue.");
+                    $(".responseMessage").css("color", "green");
+                }
 			},
 			dataType: 'json',
 		});

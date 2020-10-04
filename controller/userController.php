@@ -1,20 +1,12 @@
 <?php
 require_once("controller/controller.php");
-require_once("model/userManager.php");
 
 class UserController extends Controller{
-	private $_userMan;
-	
-	public function __construct(){
-		parent::__construct();
-		$this->_userMan = new UserManager();
-	}
-
 	public function login($username=null, $password=null){
 		if(!empty($username) && !empty($password)){
 			if($user = $this->userMan()->getByUsername($username)){
 				if(password_verify($password, $user->password())){
-					$_SESSION['connected_user'] = $user;
+					$_SESSION['user'] = $user;
 
 					$result["status"] = true;
 					echo json_encode($result);
@@ -46,7 +38,8 @@ class UserController extends Controller{
 		}
 	}
 
-	public function userMan(){
-		return $this->_userMan;
+	public function logout(){
+		$_SESSION["user"] = "";
+		session_destroy();
 	}
 }

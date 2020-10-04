@@ -11,11 +11,13 @@ try{
     require("controller/indexController.php");
     require("controller/userController.php");
     require("controller/commentController.php");
+    require("controller/adminController.php");
 
     $rm = new Router($_GET['url']);
     $postC = new PostController();
     $userC = new UserController(); 
     $indexC = new IndexController(); 
+    $adminC = new AdminController();
 
     session_start();
 
@@ -51,11 +53,19 @@ try{
         $userC->login();
     }); 
 
+    $rm->get('/user/admin', function() use($adminC) {             
+        $adminC->index();
+    }); 
+
 
 
     /*
         Ajax functions
     */
+    $rm->post('/ajax/logout', function() use($userC){  // Create a post
+        $userC->logout();
+    });
+
     $rm->post('/ajax/post', function() use($postC){  // Create a post
         $postC->createPost($_POST["title"], $_POST["subject"], $_POST["description"]);
     });
