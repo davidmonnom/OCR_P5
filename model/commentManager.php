@@ -18,7 +18,7 @@ class CommentManager {
 	}
 
 	public function getComments(){
-		$prepare = Database::getInstance()->prepare("SELECT * FROM comment"); 
+		$prepare = Database::getInstance()->prepare("SELECT * FROM comment ORDER BY id DESC"); 
 		$prepare->execute();
 
 		$commentsList = array();

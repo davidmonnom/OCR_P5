@@ -19,7 +19,7 @@ class PostManager {
 	}
 
 	public function getPosts(){
-		$prepare = Database::getInstance()->query("SELECT * FROM post"); 
+		$prepare = Database::getInstance()->query("SELECT * FROM post ORDER BY id DESC"); 
 
 		$postsList = array();
 		while ($row = $prepare->fetch(PDO::FETCH_OBJ)) {

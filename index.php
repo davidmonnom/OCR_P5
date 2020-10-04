@@ -39,6 +39,9 @@ try{
     $rm->get('/posts/create', function() use($postC) { // Show the "creating post" form
         $postC->createPost();
     });
+    $rm->get('/posts/modify/:id', function($id) use($postC) { // Show post by id               
+        $postC->modifyPost(null, null, null, $id);
+    });
     $rm->get('/posts/:id', function($id) use($postC) { // Show post by id               
         $postC->viewPost($id);
     });
@@ -63,28 +66,36 @@ try{
     /*
         Ajax functions
     */
-    $rm->post('/ajax/logout', function() use($userC){  // Create a post
+    $rm->post('/ajax/logout', function() use($userC){  // Logout
         $userC->logout();
     });
 
-    $rm->post('/ajax/deleteCom', function() use($commC){  // Create a post
+    $rm->post('/ajax/deleteUser', function() use($userC){  // Delete a comment
+        $userC->delete($_POST["idUser"]);
+    });
+
+    $rm->post('/ajax/deleteCom', function() use($commC){  // Delete a comment
         $commC->delete($_POST["idCom"]);
     });
 
-    $rm->post('/ajax/valideCom', function() use($commC){  // Create a post
+    $rm->post('/ajax/valideCom', function() use($commC){  // Validate a comment
         $commC->validate($_POST["idCom"]);
     });
 
-    $rm->post('/ajax/deletePost', function() use($postC){  // Create a post
+    $rm->post('/ajax/deletePost', function() use($postC){  // Delete a post
         $postC->delete($_POST["idPost"]);
     });
 
-    $rm->post('/ajax/validePost', function() use($postC){  // Create a post
+    $rm->post('/ajax/validePost', function() use($postC){  // Validate a post
         $postC->validate($_POST["idPost"]);
     });
 
     $rm->post('/ajax/post', function() use($postC){  // Create a post
         $postC->createPost($_POST["title"], $_POST["subject"], $_POST["description"]);
+    });
+    
+    $rm->post('/ajax/modify', function() use($postC){  // Create a post
+        $postC->modifyPost($_POST["title"], $_POST["subject"], $_POST["description"], $_POST["idPost"]);
     });
 
     $rm->post('/ajax/register', function() use($userC){ // Create an account
@@ -98,5 +109,6 @@ try{
     $rm->run(); // Execute
 }
 catch(Exception $e){
-	echo $e->getMessage();
+    $message = $e->getMessage();
+    $indexC->error($message);
 }

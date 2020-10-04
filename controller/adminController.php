@@ -9,6 +9,7 @@ class AdminController extends Controller {
             $needed_posts = array();
             $posts = $this->postMan()->getUnverifiedPosts();
             $comments = $this->commMan()->getUnverifiedComments();
+            $users = $this->userMan()->getUsers();
 
             foreach($posts as $post){
                 $idUser = $post->idUser();
@@ -30,7 +31,8 @@ class AdminController extends Controller {
                 'neededUsers' => $needed_users,
                 'neededPosts' => $needed_posts,
                 'postsList' => $posts,
-                'commentsList' => $comments
+                'commentsList' => $comments,
+                'usersList' => $users
             ));
         }
     }

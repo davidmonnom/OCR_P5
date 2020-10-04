@@ -1,3 +1,4 @@
+<div class="header" style="height:150px;"></div>
 <form action="" method="post" id="userLogin">
 	<div class="container">
 		<h1 class="pageTitle">Se connecter</h1>

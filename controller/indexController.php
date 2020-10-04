@@ -6,4 +6,9 @@ class IndexController extends Controller{
     public function index(){
         $this->view()->render('indexView.php');
     }
+    public function error($error){
+        $this->view()->render('errorView.php', array(
+            'error' => $error
+        ));
+    }
 }

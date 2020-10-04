@@ -7,6 +7,23 @@ class UserManager {
 		return new User($row->id, $row->firstname, $row->lastname, $row->username, $row->password, $creationDate, $row->isAdmin);
 	}
 
+	public function delete($id){
+		$prepare = Database::getInstance()->prepare("DELETE FROM user WHERE id = ?"); 
+		return $prepare->execute(array($id));
+	}
+
+	public function getUsers(){
+		$prepare = Database::getInstance()->prepare("SELECT * FROM user ORDER BY id DESC"); 
+		$prepare->execute();
+
+		$usersList = array();
+		while ($row = $prepare->fetch(PDO::FETCH_OBJ)) {
+			$usersList[] = $this->buildFromRow($row);
+		}
+
+		return $usersList;
+	}
+
 	public function getById($id){
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE id = ?"); 
 		$prepare->execute(array($id));

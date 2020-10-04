@@ -1,3 +1,4 @@
+<div class="header" style="height:150px;"></div>
 <form id="userRegister">
 	<div class="container">
 		<h1 class="pageTitle">S'enregistrer</h1>

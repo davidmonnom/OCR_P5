@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $("#userRegister").on('submit', function(e){
+    $("#userRegister").on('submit', function(e){  //User register request
         e.preventDefault();
         $.ajax({
         type: "POST",
@@ -22,7 +22,7 @@ $( document ).ready(function() {
         return false;
     });
 
-    $("#userLogin").on('submit', function(e){
+    $("#userLogin").on('submit', function(e){ //User login request
         e.preventDefault();
         $.ajax({
 			type: "POST",
@@ -45,7 +45,7 @@ $( document ).ready(function() {
        return false;
    });
    
-	$("#newPostForm").on('submit', function(event){
+	$("#newPostForm").on('submit', function(event){ //New post request
 		$.ajax({
 			type: "POST",
 			url: '/ajax/post',
@@ -69,9 +69,28 @@ $( document ).ready(function() {
 		});
 		event.preventDefault();
 		return false;
+	});
+	console.log($("#idPost").attr("value"));
+	$("#modifyPostForm").on('submit', function(event){ //Modify post request
+		$.ajax({
+			type: "POST",
+			url: '/ajax/modify',
+			data: {'title':$("#title").val(), 'subject':$("#subject").val(), 'description':$("#description").val(), 'idPost':$("#idPost").attr("value")},
+			success: function(reponse){
+				if(reponse.status){
+                    setTimeout(function(){
+                        window.location.href = "/posts/"+reponse.idPost;
+                    }, 5);
+                }else{
+                }
+			},
+			dataType: 'json',
+		});
+		event.preventDefault();
+		return false;
     });
     
-    $(".userLogout").on('click', function(event){
+    $(".userLogout").on('click', function(event){ //User logout request
 		$.ajax({
 			type: "POST",
 			url: '/ajax/logout',
@@ -85,15 +104,22 @@ $( document ).ready(function() {
 		return false;
     });
 
-    $(".deletePost").on('click', function(event){
+	$(".deletePost").on('click', function(event){ //Delete post request
+		console.log($(this).val());
 		$.ajax({
 			type: "POST",
 			url: '/ajax/deletePost',
 			data: {"idPost":$(this).val()},
 			success: function(reponse, data){
 				if(reponse.status == "1"){
-					$("#post_"+reponse.idPost).fadeOut( "slow", function() {
-					});
+					if($("#deleteButton").hasClass('buttonPostDelete')){
+						setTimeout(function(){
+							window.location.href = "/posts";
+						}, 500);
+					}else{
+						$("#post_"+reponse.idPost).fadeOut( "slow", function() {
+						});
+					}
 				}
 			},
 			dataType: "json",
@@ -102,7 +128,7 @@ $( document ).ready(function() {
 		return false;
     });
     
-	$(".validePost").on('click', function(event){
+	$(".validePost").on('click', function(event){ //Validate post request
 		$.ajax({
 			type: "POST",
 			url: '/ajax/validePost',
@@ -119,7 +145,7 @@ $( document ).ready(function() {
 		return false;
     });
     
-	$(".deleteComment").on('click', function(event){
+	$(".deleteComment").on('click', function(event){ //Delete comment request
 		$.ajax({
 			type: "POST",
 			url: '/ajax/deleteCom',
@@ -136,7 +162,7 @@ $( document ).ready(function() {
 		return false;
     });
     
-	$(".valideComment").on('click', function(event){
+	$(".valideComment").on('click', function(event){ //Validate comment request
 		$.ajax({
 			type: "POST",
 			url: '/ajax/valideCom',
@@ -152,4 +178,23 @@ $( document ).ready(function() {
 		event.preventDefault();
 		return false;
 	});
+
+	$(".deleteUser").on('click', function(event){ //Delete user request
+		$.ajax({
+			type: "POST",
+			url: '/ajax/deleteUser',
+			data: {"idUser":$(this).val()},
+			success: function(reponse, data){
+				if(reponse.status == "1"){
+					$("#com_"+reponse.idCom).fadeOut( "slow", function() {
+					});
+				}else{
+					console.log("error");
+				}
+			},
+			dataType: "json",
+		});
+		event.preventDefault();
+		return false;
+    });
 });

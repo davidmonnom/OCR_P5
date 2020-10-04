@@ -23,8 +23,6 @@
         max-width: 30% !important;
     }
 }
-
-}
 @media (min-width: 992px){
     .postItem{
         max-width: 30% !important;
@@ -35,7 +33,11 @@
     text-decoration: none;
     color: #EAEAEA;
 }
-.shortcutBottom:hover{
+.linkPosts{
+    color: #353a40;
+    text-decoration: none;
+}
+.shortcutBottom:hover, .linkPosts:hover{
     text-decoration: none;
     color: #FF4D4D;
 }
@@ -51,6 +53,7 @@ input, textarea{
     background-color: #353a40;
     padding-bottom: 50px;
     text-align: center;
+    margin-top: 80px;
 }
 .footerTop h5{
     color: white;
@@ -61,4 +64,15 @@ input, textarea{
 .btnAdmin{
     padding: 5px !important;
     margin-right: 5px;
+    margin-bottom: 5px;
+}
+.postDescription{
+    text-align: justify;
+}
+.adminSubTitle{
+    margin-top: 30px;
+}
+.buttonPostDelete{
+    border: none;
+    background-color: transparent;
 }

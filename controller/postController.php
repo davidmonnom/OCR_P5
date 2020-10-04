@@ -9,17 +9,23 @@ class PostController extends Controller{
     }
 
     public function viewPost($idPost){
-        $post = $this->postMan()->getById($idPost);
-        if (!$post) {
-            throw new Exception('Le post n\'a pas été trouvé');
-            return false;
-        }
+        if($_SESSION['user']->isAdmin()){
+            $post = $this->postMan()->getById($idPost);
+            if (!$post) {
+                throw new Exception('Le post n\'a pas été trouvé');
+                return false;
+            }
 
-        $commentsList = $this->commMan()->getByIdPost($idPost);
-        $this->view()->render('viewPostView.php', array(
-            'post' => $post,
-            'commentsList' => $commentsList
-        ));
+            $user = $this->userMan()->getById($post->idUser());
+            $commentsList = $this->commMan()->getByIdPost($idPost);
+            $this->view()->render('viewPostView.php', array(
+                'post' => $post,
+                'user' => $user,
+                'commentsList' => $commentsList
+            ));
+        }else{
+            throw new Exception("Ce post n'a pas encore été validé.");
+        }
     }
 
     public function createPost($title=NULL, $subject=NULL, $description=NULL){
@@ -30,6 +36,26 @@ class PostController extends Controller{
             echo json_encode($result);
         }else{
             $this->view()->render('createPostView.php');
+        }
+    }
+
+    public function modifyPost($title=NULL, $subject=NULL, $description=NULL, $idPost){
+        if(!empty($title) && !empty($subject) && !empty($description)){
+            $post = $this->postMan()->getById($idPost);
+            $post->setIsVerified(0);
+            $post->setTitle($title);
+            $post->setSubject($subject);
+            $post->setDescription($description);
+
+            $return = $this->postMan()->update($post);
+            $reponse["status"] = $return;
+            $reponse["idPost"] = $idPost;
+            echo json_encode($reponse);
+        }else{
+            $post = $this->postMan()->getById($idPost);
+            $this->view()->render('modifyPostView.php', array(
+                'post' => $post,
+            ));
         }
     }
 
