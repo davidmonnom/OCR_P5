@@ -1,5 +1,7 @@
 <html>
     <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link href="https://fludy.net/assets/css/style.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
@@ -35,7 +37,7 @@
 							</li>
 						<?php }else{ ?>
 							<li class="nav-item">
-								<a class="nav-link" href="/user/logout">Se déconnecter</a>
+								<a class="nav-link userLogout" href="">Se déconnecter</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#">
@@ -53,9 +55,28 @@
             ?>
         </section>
         <section class="footerSection">
-			<?php if($user->isAdmin()){ ?>
-				<a class="dropdown-item" href="/user/admin">Administration</a>
-			<?php } ?>
+		<footer class="footer">
+			<div class='footerTop'>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<h5>Raccourcis</h5>
+							<a href="/" class="shortcutBottom">Accueil</a><br/>
+							<a href="/posts" class="shortcutBottom">Liste des posts</a><br/>
+							<a href="/posts/create" class="shortcutBottom">Créer un post</a><br/>
+						</div>
+						<div class="col-lg-6">
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright text-center py-3 footerBottom">
+				<?php if(!is_null($user)){ if($user->isAdmin()){ ?>
+					<a href="/user/admin" class="shortcutBottom">Administration</a>
+				<?php }} ?>
+			</div>
+		</footer>
         </section>
     </body>
 </html>

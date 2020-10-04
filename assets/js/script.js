@@ -69,6 +69,20 @@ $( document ).ready(function() {
 		});
 		event.preventDefault();
 		return false;
+    });
+    
+    $(".userLogout").on('click', function(event){
+		$.ajax({
+			type: "POST",
+			url: '/ajax/logout',
+			data: {},
+			success: function(reponse){
+                window.location.href = "/";
+            },
+			dataType: 'json',
+		});
+		event.preventDefault();
+		return false;
 	});
    
 });

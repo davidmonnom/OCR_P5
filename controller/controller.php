@@ -8,12 +8,12 @@ class Controller{
     private $_view;
     private $_postMan;
     private $_userMan;
-    private $_commentMan;
+    private $_commMan;
 
     public function __construct(){
         $this->_view = new View();
         $this->_postMan = new PostManager();
-        $this->_commentMan = new CommentManager();
+        $this->_commMan = new CommentManager();
         $this->_userMan = new UserManager();
     }
 

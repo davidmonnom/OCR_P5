@@ -1,6 +1,6 @@
 <form action="" method="post" id="userLogin">
 	<div class="container">
-		<h1>Se connecter</h1>
+		<h1 class="pageTitle">Se connecter</h1>
 		<p>Entrez vos identifiants.</p>
 		<hr>
 		<label for="username"><b>Nom d'utilisateur</b></label>

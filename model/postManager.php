@@ -3,11 +3,24 @@ require_once('model/entity/post.php');
 
 class PostManager {
 	private function buildFromRow($row){
-		return new Post($row->id, $row->idUser, $row->title, $row->subject, $row->description, $row->creationDate, $row->modifyDate, $row->isVerified);
+		$creationDate = DateTime::createFromFormat('Y-m-d H:i:s', $row->creationDate);
+		$modifyDate = DateTime::createFromFormat('Y-m-d H:i:s', $row->modifyDate);
+		return new Post($row->id, $row->idUser, $row->title, $row->subject, $row->description, $creationDate, $modifyDate, $row->isVerified);
 	}
 	
 	public function getPosts(){
 		$prepare = Database::getInstance()->query("SELECT * FROM post"); 
+
+		$postsList = array();
+		while ($row = $prepare->fetch(PDO::FETCH_OBJ)) {
+			$postsList[] = $this->buildFromRow($row);
+		}
+
+		return $postsList;
+	}
+
+	public function getUnverifiedPosts(){
+		$prepare = Database::getInstance()->query("SELECT * FROM post WHERE isVerified='0'"); 
 
 		$postsList = array();
 		while ($row = $prepare->fetch(PDO::FETCH_OBJ)) {
@@ -30,6 +43,6 @@ class PostManager {
 
 	public function add($post){
 		$prepare = Database::getInstance()->prepare("INSERT INTO post(idUser, title, subject, description, creationDate, isVerified) VALUES(?, ?, ?, ?, ?, ?)"); 
-		return $prepare->execute(array($post->idUser(), $post->title(), $post->subject(), $post->description(), $post->creationDate(), $post->isVerified()));
+		return $prepare->execute(array($post->idUser(), $post->title(), $post->subject(), $post->description(), $post->creationDate()->format('Y-m-d H:i:s'), $post->isVerified()));
 	}
 }

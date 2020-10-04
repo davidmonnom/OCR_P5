@@ -7,6 +7,17 @@ class UserManager {
 		return new User($row->id, $row->firstname, $row->lastname, $row->username, $row->password, $creationDate, $row->isAdmin);
 	}
 
+	public function getById($id){
+		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE id = ?"); 
+		$prepare->execute(array($id));
+
+		if($row = $prepare->fetch(PDO::FETCH_OBJ)){
+			return $this->buildFromRow($row);
+		}else{
+			return false;
+		}
+	}
+
 	public function getByUsername($username){
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE username = ?"); 
 		$prepare->execute(array($username));

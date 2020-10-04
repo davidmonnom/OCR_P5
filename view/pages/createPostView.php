@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Nouveau posts</h1>
+    <h1 class="pageTitle">Nouveau posts</h1>
     <p>Créer votre post</p>
     <form action="" id='newPostForm' method="post">
         <label for="title"><b>Sujet</b></label><br/>

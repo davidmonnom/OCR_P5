@@ -1,6 +1,6 @@
 <form id="userRegister">
 	<div class="container">
-		<h1>S'enregistrer</h1>
+		<h1 class="pageTitle">S'enregistrer</h1>
 		<p>Entrez vos informations afin de vous enregistrer.</p>
 		<hr>
 		<label for="Pseudo"><b>Pseudo</b></label>
