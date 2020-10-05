@@ -13,7 +13,7 @@
 			<header class="blog-header py-3">
 				<div class="row flex-nowrap justify-content-between align-items-center">
 					<div class="col-4 pt-1">
-						<a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/blog/#">Subscribe</a>
+						<a class="text-muted" target="_blank" href="/assets/pdf/myCV.pdf">Curriculum Vitae</a>
 					</div>
 					<div class="col-4 text-center">
 						<a class="blog-header-logo colorRandomText" href="">MVC</a>
@@ -25,7 +25,7 @@
 						<?php if(is_null($user)){ ?>
 							<a class="btn btn-sm btn-outline-secondary" href="/user/login">Se connecter</a>
 						<?php }else{ ?>
-							<a class="btn btn-sm btn-outline-secondary logoutBtn userLogout" href=""><?=$user->userName();?></a>
+							<a class="btn btn-sm btn-outline-secondary logoutBtn userLogout" href="">Se déconnecter (<?=$user->userName();?>)</a>
 						<?php }?>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 					<a class="p-2 text-muted" href="/posts/create">Créer</a>
 					<a class="p-2 text-muted" href="/posts/1">Règles</a>
 					<a class="p-2 text-muted" href="/user/admin">Administration</a>
-					<a class="p-2 text-muted" href="https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr%C3%B4leur#:~:text=Mod%C3%A8le%2Dvue%2Dcontr%C3%B4leur%20ou%20MVC,les%20vues%20et%20les%20contr%C3%B4leurs.">MVC</a>
+					<a class="p-2 text-muted" target="_blank" href="https://fr.wikipedia.org/wiki/Mod%C3%A8le-vue-contr%C3%B4leur#:~:text=Mod%C3%A8le%2Dvue%2Dcontr%C3%B4leur%20ou%20MVC,les%20vues%20et%20les%20contr%C3%B4leurs.">MVC</a>
 					<a class="p-2 text-muted" target="_blank" href="https://github.com/davidmonnom/OCR_P5">Github</a>
 					<a class="p-2 text-muted" target="_blank" href="https://www.facebook.com/monnom.david/">Facebook</a>
 					<a class="p-2 text-muted" target="_blank" href="https://twitter.com/monmdavid">Twitter</a>
@@ -77,6 +77,7 @@
 				<?php if(!is_null($user)){ if($user->isAdmin()){ ?>
 					<a href="/user/admin" class="shortcutBottom">Administration</a>
 				<?php }} ?>
+					<span> &bull; </span><a href="/assets/htm/sitemap.htm" class="shortcutBottom">Site Map</a>
 			</div>
 		</footer>
         </section>
