@@ -19,3 +19,5 @@ Installation :
 PS: Le nom d'utilisateur par défaut est : Login: admin Password: admin
 
 Vous pourrez ensuite donner les droits à un autre utilisateur.
+
+Site hébergé sur https://fludy.net (Pour le moment).
