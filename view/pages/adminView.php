@@ -23,12 +23,12 @@
                         $post = $neededPosts[$comment->idPost()];
                         if(!$post) continue;
 
-                        $post_id = $post->id();
+                        $post_id = intval($post->id());
 
-                        $comment_id = $comment->id();
-                        $comment_post = $post->title();
+                        $comment_id = intval($comment->id());
+                        $comment_post = htmlspecialchars($post->title());
                         $comment_description = htmlspecialchars($comment->description());
-                        $comment_username = $user->username();
+                        $comment_username = htmlspecialchars($user->username());
                         $comment_date = $comment->creationDate()->format('Y-m-d H:i:s');
 
                         echo("<tr id='com_$comment_id'>");
@@ -65,9 +65,9 @@
                         $user = $neededUsers[$post->idUser()];
                         if (!$user) continue;
 
-                        $post_id = $post->id();
+                        $post_id = intval($post->id());
                         $post_subject = htmlspecialchars($post->subject());
-                        $post_username = $user->username();
+                        $post_username = htmlspecialchars($user->username());
                         $post_date = $post->creationDate()->format('Y-m-d H:i:s');
 
                         echo("<tr id='post_$post_id'>");
@@ -101,7 +101,7 @@
             <tbody>
                 <?php
                     foreach($usersList as $key => $user){
-                        $user_id = htmlspecialchars($user->id());
+                        $user_id = intval($user->id());
                         $user_lastname = htmlspecialchars($user->lastname());
                         $user_firstname = htmlspecialchars($user->firstname());
                         $user_username = htmlspecialchars($user->username());
