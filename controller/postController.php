@@ -8,7 +8,7 @@ class PostController extends Controller{
         ));
     }
 
-    public function viewPost($idPost){
+    public function viewPost($idPost){ //Show post by id
         $post = $this->postMan()->getById($idPost);
         if (!$post) {
             throw new Exception('Le post n\'a pas été trouvé');
@@ -39,7 +39,7 @@ class PostController extends Controller{
         }
     }
 
-    public function createPost($title=NULL, $subject=NULL, $description=NULL){
+    public function createPost($title=NULL, $subject=NULL, $description=NULL){ //Create post
         if(!empty($title) && !empty($subject) && !empty($description) && isset($_SESSION["user"])){
             $return = $this->postMan()->add(new Post(null, $_SESSION["user"]->id(), $title, $subject, $description, new DateTime('NOW'), null, 0));
 
@@ -54,7 +54,7 @@ class PostController extends Controller{
         }
     }
 
-    public function modifyPost($title=NULL, $subject=NULL, $description=NULL, $idPost){
+    public function modifyPost($title=NULL, $subject=NULL, $description=NULL, $idPost){ //modify post
         if(!empty($title) && !empty($subject) && !empty($description)){
             $post = $this->postMan()->getById($idPost);
             $post->setIsVerified(0);
@@ -74,7 +74,7 @@ class PostController extends Controller{
         }
     }
 
-    public function delete($id){
+    public function delete($id){ //delete post by id
         if(isset($_SESSION["user"])){
             if($_SESSION["user"]->isAdmin()){
                 $return = $this->postMan()->delete($id);
@@ -85,7 +85,7 @@ class PostController extends Controller{
             }
         }
     }
-    public function validate($id){
+    public function validate($id){ //validate post
         if(isset($_SESSION["user"])){
             if($_SESSION["user"]->isAdmin()){
                 $post = $this->postMan()->getById($id);

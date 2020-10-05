@@ -5,7 +5,7 @@
                 echo('<h1 class="pageTitle" style="margin-bottom: 30px;" >' . htmlspecialchars($post->title()) . '</h1>');
                 echo('<em>Le : ' . $post->creationDate()->format('d/m/Y H:i:s') . '</em><strong> par ' . $needed_users[$post->idUser()]->username() . '</strong>');
                 if(isset($_SESSION["user"])){ if($_SESSION["user"]->isAdmin()){echo("<button href='' id='deleteButton' value=".htmlspecialchars($post->id())." class='deletePost buttonPostDelete linkPosts'>  Supprimer</button>");} if(intval($post->idUser()) == intval($_SESSION["user"]->id()) || $_SESSION["user"]->isAdmin()){ echo("<a href='/posts/modify/".htmlspecialchars($post->id())."' class='modifyPost buttonPostDelete linkPosts'>Modifier</a>");}}
-                echo('<p style="margin-top: 15px" class="postDescription">' . htmlspecialchars($post->description()) . '</p>');
+                echo('<p style="margin-top: 15px" class="postDescription">' . nl2br(htmlspecialchars($post->description())) . '</p>');
                 // Show the edit date if exists
                 if($post->modifyDate() != null){echo ('Dernière modification : '. $post->modifyDate()->format('d/m/Y H:i:s'));}
             ?>
@@ -17,7 +17,7 @@
                 foreach($commentsList as $item){ if($item->isVerified()){?>
                     <div class="commentItem">
                         <span class="commentInfo"><?= "Le ".$item->creationDate()->format('d/m/Y H:i:s')." par ".$needed_users[$item->idUser()]->username(); ?></span>
-                        <p class="commmentDescription"><?= htmlspecialchars($item->description()); ?></p>
+                        <p class="commmentDescription"><?= nl2br(htmlspecialchars($item->description())); ?></p>
                     </div>
             <?php }} ?>
         <form action="" id='newComment' value="<?= htmlspecialchars($post->id()); ?>" method="post">

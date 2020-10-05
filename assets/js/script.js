@@ -104,7 +104,7 @@ $( document ).ready(function() {
 		$.ajax({
 			type: "POST",
 			url: '/ajax/modify',
-			data: {'title':$("#title").val(), 'subject':$("#subject").val(), 'description':$("#description").val(), 'idPost':$("#idPost").attr("value")},
+			data: {"title":$("#title").val(), "subject":$("#subject").val(), "description":$("#description").val(), "idPost":$("#idPost").attr("value")},
 			success: function(reponse){
 				if(reponse.status){
                     setTimeout(function(){
@@ -225,5 +225,32 @@ $( document ).ready(function() {
 		});
 		event.preventDefault();
 		return false;
-    });
+	});
+	
+	$("#contactForm").on('submit', function(event){ //Contact form
+		$.ajax({
+			type: "POST",
+			url: '/ajax/contact',
+			data: {"name":$("#name").val(),"email":$("#email").val(),"message":$("#message").val()},
+			success: function(reponse, data){
+				if(reponse.status == 1){
+					$('#name').val('');
+					$('#message').val('');
+					$('#email').val('');
+					$("#reponse_message").text('Votre message à bien été envoyé');
+					$("#reponse_message").css('color', 'green');
+				}else if(reponse.status == 0){
+					$("#reponse_message").text('Connectez-vous avant de nous contacter.');
+					$("#reponse_message").css('color', 'red');
+				}else{
+					$("#reponse_message").text('Oops une erreur est survenue');
+					$("#reponse_message").css('color', 'red');
+				}
+				
+			},
+			dataType: "json",
+		});
+		event.preventDefault();
+		return false;
+	});
 });

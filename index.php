@@ -109,6 +109,10 @@ try{
     $rm->post('/ajax/login', function() use($userC){ // Create an account
         $userC->login($_POST["username"], $_POST["password"]);
     });
+    
+    $rm->post('/ajax/contact', function() use($indexC){ // Contact form
+        $indexC->contact($_POST["name"], $_POST["email"], $_POST["message"]);
+    });
 
     $rm->run(); // Execute
 }
