@@ -25,7 +25,7 @@
 						<?php if(is_null($user)){ ?>
 							<a class="btn btn-sm btn-outline-secondary" href="/user/login">Se connecter</a>
 						<?php }else{ ?>
-							<a class="btn btn-sm btn-outline-secondary logoutBtn userLogout" href="">Se déconnecter (<?=$user->userName();?>)</a>
+							<a class="btn btn-sm btn-outline-secondary logoutBtn userLogout" href="">Se déconnecter (<?= htmlspecialchars($user->userName());?>)</a>
 						<?php }?>
 					</div>
 				</div>

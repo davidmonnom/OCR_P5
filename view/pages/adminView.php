@@ -23,25 +23,17 @@
                         $post = $neededPosts[$comment->idPost()];
                         if(!$post) continue;
 
-                        $post_id = intval($post->id());
-
-                        $comment_id = intval($comment->id());
-                        $comment_post = htmlspecialchars($post->title());
-                        $comment_description = htmlspecialchars($comment->description());
-                        $comment_username = htmlspecialchars($user->username());
-                        $comment_date = $comment->creationDate()->format('Y-m-d H:i:s');
-
-                        echo("<tr id='com_$comment_id'>");
-                            echo("<td>$key</td>");
-                            echo("<td>$comment_id</td>");
-                            echo("<td><a href='/posts/$post_id'>$comment_post</a></td>");
-                            echo("<td>$comment_description</td>");
-                            echo("<td>$comment_username</td>");
-                            echo("<td>$comment_date</td>");
-                            echo("<td><button value='$comment_id'class='btn btn-sm btn-outline-secondary btnAdmin deleteComment'>Supprimer</button><button value='$comment_id' class='btn btn-sm btn-outline-secondary btnAdmin valideComment'>Valider</button></td>");
-                        echo("</tr>");
-                    }
-                ?>
+                        ?>
+                        <tr id="com_<?= htmlspecialchars($comment->id()); ?>">
+                            <td><?= $key; ?></td>
+                            <td><?= htmlspecialchars($comment->id()); ?></td>
+                            <td><?= htmlspecialchars($post->title()); ?></td>
+                            <td><?= htmlspecialchars($comment->description()); ?></td>
+                            <td><?= htmlspecialchars($user->username()); ?></td>
+                            <td><?= $comment->creationDate()->format('Y-m-d H:i:s'); ?></td>
+                            <td><button value='<?= htmlspecialchars($comment->id()) ?>'class='btn btn-sm btn-outline-secondary btnAdmin deleteComment'>Supprimer</button><button value='<?= htmlspecialchars($comment->id()) ?>' class='btn btn-sm btn-outline-secondary btnAdmin valideComment'>Valider</button></td>
+                        </tr>
+                <?php } ?>
             </tbody>
         </table>
 
