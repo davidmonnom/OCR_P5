@@ -2,17 +2,17 @@
 require_once('model/entity/user.php');
 
 class UserManager {
-	private function buildFromRow($row){
+	private function buildFromRow($row){ //build row
 		$creationDate = DateTime::createFromFormat('Y-m-d H:i:s', $row->creationDate);
-		return new User($row->id, $row->firstname, $row->lastname, $row->username, $row->password, $creationDate, $row->isAdmin);
+		return new User($row->id, $row->firstname, $row->lastname, $row->username, $row->password, $creationDate, $row->isAdmin); //new object
 	}
 
-	public function delete($id){
+	public function delete($id){ //delete
 		$prepare = Database::getInstance()->prepare("DELETE FROM user WHERE id = ?"); 
 		return $prepare->execute(array($id));
 	}
 
-	public function getUsers(){
+	public function getUsers(){ //get all users
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user ORDER BY id DESC"); 
 		$prepare->execute();
 
@@ -24,7 +24,7 @@ class UserManager {
 		return $usersList;
 	}
 
-	public function getById($id){
+	public function getById($id){ //get user by id
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE id = ?"); 
 		$prepare->execute(array($id));
 
@@ -35,7 +35,7 @@ class UserManager {
 		}
 	}
 
-	public function getByUsername($username){
+	public function getByUsername($username){ //get user by username
 		$prepare = Database::getInstance()->prepare("SELECT * FROM user WHERE username = ?"); 
 		$prepare->execute(array($username));
 

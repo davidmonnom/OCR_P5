@@ -90,7 +90,7 @@ $( document ).ready(function() {
                         window.location.href = "/posts";
                     }, 2000);
                 }else{
-                    $(".responseMessage").text("Une erreur est survenue.");
+                    $(".responseMessage").text("Connectez-vous avant de publier un post.");
                     $(".responseMessage").css("color", "red");
                 }
 			},

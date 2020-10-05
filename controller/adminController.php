@@ -3,8 +3,8 @@ require_once("controller/controller.php");
 
 class AdminController extends Controller {
     public function index(){
-        if(isset($_SESSION["user"])){
-            if($_SESSION["user"]->isAdmin() == 1){
+        if(isset($_SESSION["user"])){ //user connected ? 
+            if($_SESSION["user"]->isAdmin() == 1){ //user admin ?
 
                 $needed_users = array();
                 $needed_posts = array();
@@ -12,13 +12,13 @@ class AdminController extends Controller {
                 $comments = $this->commMan()->getUnverifiedComments();
                 $users = $this->userMan()->getUsers();
 
-                foreach($posts as $post){
+                foreach($posts as $post){ //needed user for posts
                     $idUser = $post->idUser();
                     if(!isset($needed_users[$idUser]))
                         $needed_users[$idUser] = $this->userMan()->getById($idUser);
                 }
 
-                foreach($comments as $comment){
+                foreach($comments as $comment){ //needed user for comments
                     $idUser = $comment->idUser();
                     if(!isset($needed_users[$idUser]))
                         $needed_users[$idUser] = $this->userMan()->getById($idUser);

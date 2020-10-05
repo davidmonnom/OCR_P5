@@ -2,7 +2,7 @@
 require_once("controller/controller.php");
 
 class PostController extends Controller{
-    public function listPosts(){
+    public function listPosts(){ //listpost
         $this->view()->render('listPostsView.php', array(
             'postsList' => $this->postMan()->getPosts()
         ));

@@ -57,7 +57,7 @@ try{
         $userC->login();
     }); 
 
-    $rm->get('/user/admin', function() use($adminC) {             
+    $rm->get('/user/admin', function() use($adminC) { //Show admin page      
         $adminC->index();
     }); 
 
@@ -106,7 +106,7 @@ try{
         $userC->register($_POST["username"], $_POST["firstname"], $_POST["lastname"], $_POST["password"]);
     });
 
-    $rm->post('/ajax/login', function() use($userC){ // Create an account
+    $rm->post('/ajax/login', function() use($userC){ // Login in
         $userC->login($_POST["username"], $_POST["password"]);
     });
     

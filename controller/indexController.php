@@ -3,17 +3,17 @@ require_once("controller/controller.php");
 require_once("model/userManager.php");
 
 class IndexController extends Controller{
-    public function index(){
+    public function index(){ //home page
         $this->view()->render('indexView.php', array(
             'postsList' => $this->postMan()->getPosts()
         ));
     }
-    public function error($error){
+    public function error($error){ //error page
         $this->view()->render('errorView.php', array(
             'error' => $error
         ));
     }
-    public function contact($name, $email, $message){
+    public function contact($name, $email, $message){ //contact form
         $name = strip_tags(trim($name));
         $name = str_replace(array("\r","\n"),array(" "," "),$name);
         $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);

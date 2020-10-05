@@ -2,7 +2,7 @@
 require_once("controller/controller.php");
 
 class CommentController extends Controller{
-    public function delete($id){
+    public function delete($id){ //delete comment
         if(isset($_SESSION["user"])){
             if($_SESSION["user"]->isAdmin()){
                 $return = $this->commMan()->delete($id);
@@ -14,7 +14,7 @@ class CommentController extends Controller{
         }
     }
 
-    public function createComment($idPost, $description){
+    public function createComment($idPost, $description){ //create comment
         if(isset($_SESSION["user"])){
             $return = $this->commMan()->add(new Comment(null, $idPost, $_SESSION["user"]->id(), $description, new DateTime('NOW'), 0));
 
@@ -26,9 +26,9 @@ class CommentController extends Controller{
         }
     }
 
-    public function validate($id){
+    public function validate($id){ //validate comment
         if(isset($_SESSION["user"])){
-            if($_SESSION["user"]->isAdmin()){
+            if($_SESSION["user"]->isAdmin()){ //user admin ?
                 $comment = $this->commMan()->getById($id);
                 if(!$comment){
                     $reponse["status"] = false;
