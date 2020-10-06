@@ -99,7 +99,6 @@ $( document ).ready(function() {
 		event.preventDefault();
 		return false;
 	});
-	console.log($("#idPost").attr("value"));
 	$("#modifyPostForm").on('submit', function(event){ //Modify post request
 		$.ajax({
 			type: "POST",
@@ -163,9 +162,7 @@ $( document ).ready(function() {
 			url: '/ajax/validePost',
 			data: {"idPost":$(this).val()},
 			success: function(reponse, data){
-				console.log("there");
 				if(reponse.status == true){
-					console.log("valideok");
 					$("#post_"+reponse.idPost).fadeOut( "slow", function() {
 					});
 				}

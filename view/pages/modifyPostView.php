@@ -3,7 +3,7 @@
     <p>Modifier votre post</p>
     <form action="" id='modifyPostForm' method="post">
         <h5 class="subTitleForm" for="title">Titre</h5><br/>
-        <input id="title" type="text" placeholder="Sujet" name="title" value='<?= htmlspecialchars($post->title()); ?>' required><br/>
+        <input id="title" type="text" placeholder="Sujet" name="title" value="<?= htmlspecialchars($post->title()); ?>" required><br/>
         <h5 class="subTitleForm" for="subject">Sujet</h5><br/>
         <textarea id="subject" name="subject" cols="35" rows="4"><?= htmlspecialchars($post->subject()); ?></textarea><br/>
         <h5 class="subTitleForm" for="description">Description</h5><br/>
