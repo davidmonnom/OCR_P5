@@ -29,7 +29,7 @@
                         </p>
                         <a class="linkPosts" href="/posts/<?php echo $item->id() ?>">Voir le posts</a>
                     <!-- </div> -->
-                    <div class="card-shape-right colorRandom flex-auto d-none d-md-block" style="width: 100%; height: 6px; margin-top: 15px; background-color: #7FCBFF; border-radius: 5px;"></div>
+                    <div class="card-shape-right colorRandom flex-auto d-md-block" style="width: 100%; height: 6px; margin-top: 15px; background-color: #7FCBFF; border-radius: 5px;"></div>
                 </div>
             </div>
         </div>

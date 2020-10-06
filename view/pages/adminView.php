@@ -56,22 +56,16 @@
                     foreach($postsList as $key => $post){
                         $user = $neededUsers[$post->idUser()];
                         if (!$user) continue;
-
-                        $post_id = intval($post->id());
-                        $post_subject = htmlspecialchars($post->subject());
-                        $post_username = htmlspecialchars($user->username());
-                        $post_date = $post->creationDate()->format('Y-m-d H:i:s');
-
-                        echo("<tr id='post_$post_id'>");
-                            echo("<td>$key</td>");
-                            echo("<td>$post_id</td>");
-                            echo("<td>$post_subject</td>");
-                            echo("<td>$post_username</td>");
-                            echo("<td>$post_date</td>");
-                            echo("<td><button value='$post_id'class='btn btn-sm btn-outline-secondary btnAdmin deletePost'>Supprimer</button><button value='$post_id' class='btn btn-sm btn-outline-secondary btnAdmin validePost'>Valider</button></td>");
-                        echo("</tr>");
-                    }
-                ?>
+                    ?>
+                    <tr id='post_<?= intval($post->id()); ?>'>
+                        <td><?= intval($key); ?></td>
+                        <td><?= intval($post->id()); ?></td>
+                        <td><?= htmlspecialchars($post->subject()); ?></td>
+                        <td><?= htmlspecialchars($user->username()); ?></td>
+                        <td><?= $post->creationDate()->format('Y-m-d H:i:s'); ?></td>
+                        <td><button value='<?= intval($post->id()); ?>'class='btn btn-sm btn-outline-secondary btnAdmin deletePost'>Supprimer</button><button value='<?= intval($post->id()); ?>' class='btn btn-sm btn-outline-secondary btnAdmin validePost'>Valider</button></td>
+                    </tr> 
+                  <?php  } ?>
             </tbody>
         </table>
 
@@ -93,25 +87,18 @@
             <tbody>
                 <?php
                     foreach($usersList as $key => $user){
-                        $user_id = intval($user->id());
-                        $user_lastname = htmlspecialchars($user->lastname());
-                        $user_firstname = htmlspecialchars($user->firstname());
-                        $user_username = htmlspecialchars($user->username());
-                        $user_creationDate = $user->creationDate()->format('Y-m-d H:i:s');
-
-                        echo("<tr id='user_$user_id'>");
-                            echo("<td>$key</td>");
-                            echo("<td>$user_id</td>");
-                            echo("<td>$user_lastname</td>");
-                            echo("<td>$user_firstname</td>");
-                            echo("<td>$user_username</td>");
-                            echo("<td>$user_creationDate</td>");
-                            if(!$user->isAdmin()){echo("<td><button value='$user_id'class='btn btn-sm btn-outline-secondary btnAdmin deleteUser'>Supprimer</button></td>");}else{echo "<td>!! Admin !!</td>";}
-                        echo("</tr>");
-                    }
-                ?>
+                    ?>
+                        <tr id='user_<?= intval($user->id()); ?>'>
+                            <td><?= intval($key) ?></td>
+                            <td><?= intval($user->id()); ?></td>
+                            <td><?= htmlspecialchars($user->lastname()); ?></td>
+                            <td><?= htmlspecialchars($user->firstname()); ?></td>
+                            <td><?= htmlspecialchars($user->username()); ?></td>
+                            <td><?= $user->creationDate()->format('Y-m-d H:i:s'); ?></td>
+                            <?php  if(!$user->isAdmin()){echo "<td><button value=".intval($user->id())." class='btn btn-sm btn-outline-secondary btnAdmin deleteUser'>Supprimer</button></td>"; }else{echo "<td>!! Admin !!</td>";} ?>
+                        </tr>
+                <?php } ?>
             </tbody>
         </table>
-
     </div>
 </div>

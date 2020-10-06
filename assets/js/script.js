@@ -134,7 +134,6 @@ $( document ).ready(function() {
     });
 
 	$(".deletePost").on('click', function(event){ //Delete post request
-		console.log($(this).val());
 		$.ajax({
 			type: "POST",
 			url: '/ajax/deletePost',
@@ -142,6 +141,7 @@ $( document ).ready(function() {
 			success: function(reponse, data){
 				if(reponse.status == "1"){
 					if($("#deleteButton").hasClass('buttonPostDelete')){
+						console.log("here");
 						setTimeout(function(){
 							window.location.href = "/posts";
 						}, 500);
@@ -163,7 +163,9 @@ $( document ).ready(function() {
 			url: '/ajax/validePost',
 			data: {"idPost":$(this).val()},
 			success: function(reponse, data){
-				if(reponse.status == "1"){
+				console.log("there");
+				if(reponse.status == true){
+					console.log("valideok");
 					$("#post_"+reponse.idPost).fadeOut( "slow", function() {
 					});
 				}
