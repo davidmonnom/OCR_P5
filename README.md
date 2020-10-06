@@ -8,7 +8,7 @@ Projet 5 d'OpenClassRooms: Créer un site avec MVC.
 
 Installation :
 
-- Importez "myblog.sql" dans votre base de données MYSQL (via phpMyAdmin cela fonctionne très bien).
+- Importez "projet5b.sql" dans votre base de données MYSQL (via phpMyAdmin cela fonctionne très bien).
 
 - Téléchargez tous les fichiers et placez les à la racine de votre siteweb.
 
@@ -16,7 +16,7 @@ Installation :
 
 - Enjoy :-)
 
-PS: Le nom d'utilisateur par défaut est : Login: admin Password: admin
+PS: Le nom d'utilisateur par défaut est : Login:  Password: 
 
 Vous pourrez ensuite donner les droits à un autre utilisateur.
 
